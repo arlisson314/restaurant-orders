@@ -21,6 +21,14 @@ def hamburger_counter(data):
     return dish.count("hamburguer")
 
 
+def unordered_food(data):
+    menu = {line.split(",")[1] for line in data}
+    requests_joao = {
+        line.split(",")[1] for line in data if line.startswith("joao")
+    }
+    return menu.difference(requests_joao)
+
+
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
@@ -30,5 +38,6 @@ def analyze_log(path_to_file):
             data = file.readlines()
             most_requested_dish(data)
             hamburger_counter(data)
+            unordered_food(data)
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
