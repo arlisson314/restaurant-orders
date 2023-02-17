@@ -41,7 +41,20 @@ class TrackOrders:
         return days.difference(days_that_customer_did_not_attend)
 
     def get_busiest_day(self):
-        pass
+        days = [line[2] for line in self.orders]
+        count = {}
+        most_frequented = days[0]
+
+        for day in days:
+            if day in count:
+                count[day] += 1
+            else:
+                count[day] = 1
+
+        if count[day] > count[most_frequented]:
+            most_frequented = day
+
+        return most_frequented
 
     def get_least_busy_day(self):
         pass
