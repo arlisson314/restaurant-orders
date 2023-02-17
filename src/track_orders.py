@@ -26,10 +26,19 @@ class TrackOrders:
         return most_requested
 
     def get_never_ordered_per_customer(self, customer):
-        pass
+        menu = {line[1] for line in self.orders}
+        requests_customer = {
+            line[1] for line in self.orders if line[0] == customer
+        }
+        return menu.difference(requests_customer)
 
     def get_days_never_visited_per_customer(self, customer):
-        pass
+        days = {line[2].replace('\n', '') for line in self.orders}
+
+        days_that_customer_did_not_attend = {
+            line[2] for line in self.orders if line[0] == customer
+        }
+        return days.difference(days_that_customer_did_not_attend)
 
     def get_busiest_day(self):
         pass
