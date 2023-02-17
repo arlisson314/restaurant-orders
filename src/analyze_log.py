@@ -36,7 +36,7 @@ def unattended_days(data):
         line.split(",")[2].replace('\n', '')
         for line in data if line.startswith("joao")
     }
-    print(days.difference(days_that_joao_did_not_attend))
+    return days.difference(days_that_joao_did_not_attend)
 
 
 def analyze_log(path_to_file):
@@ -46,9 +46,13 @@ def analyze_log(path_to_file):
     try:
         with open(path_to_file, "r") as file:
             data = file.readlines()
-            most_requested_dish(data)
-            hamburger_counter(data)
-            unordered_food(data)
-            unattended_days(data)
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
+
+    with open("data/mkt_campaign.txt", "w") as new_file:
+        new_file.write(
+            f"{most_requested_dish(data)}\n"
+            f"{hamburger_counter(data)}\n"
+            f"{unordered_food(data)}\n"
+            f"{unattended_days(data)}"
+        )
