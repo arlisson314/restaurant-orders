@@ -29,6 +29,16 @@ def unordered_food(data):
     return menu.difference(requests_joao)
 
 
+def unattended_days(data):
+    days = {line.split(",")[2].replace('\n', '') for line in data}
+
+    days_that_joao_did_not_attend = {
+        line.split(",")[2].replace('\n', '')
+        for line in data if line.startswith("joao")
+    }
+    print(days.difference(days_that_joao_did_not_attend))
+
+
 def analyze_log(path_to_file):
     if not path_to_file.endswith(".csv"):
         raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
@@ -39,5 +49,6 @@ def analyze_log(path_to_file):
             most_requested_dish(data)
             hamburger_counter(data)
             unordered_food(data)
+            unattended_days(data)
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
