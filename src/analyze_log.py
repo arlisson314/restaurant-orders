@@ -1,2 +1,3 @@
 def analyze_log(path_to_file):
-    print('Hello word')
+    if not path_to_file.endswith(".csv"):
+        raise FileNotFoundError(f"Extensão inválida: '{path_to_file}'")
