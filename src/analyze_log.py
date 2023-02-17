@@ -49,10 +49,12 @@ def analyze_log(path_to_file):
     except FileNotFoundError:
         raise FileNotFoundError(f"Arquivo inexistente: '{path_to_file}'")
 
-    with open("data/mkt_campaign.txt", "w") as new_file:
-        new_file.write(
+    result = [
             f"{most_requested_dish(data)}\n"
             f"{hamburger_counter(data)}\n"
             f"{unordered_food(data)}\n"
             f"{unattended_days(data)}"
-        )
+        ]
+
+    with open("data/mkt_campaign.txt", "w") as new_file:
+        new_file.writelines(result)
