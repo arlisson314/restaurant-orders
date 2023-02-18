@@ -37,4 +37,4 @@ class InventoryControl:
             self.ingredients_manager[ingredient] += 1
 
     def get_quantities_to_buy(self):
-        pass
+        return self.ingredients_manager
