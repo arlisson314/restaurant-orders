@@ -1,3 +1,6 @@
+from src.track_orders import TrackOrders
+
+
 class InventoryControl:
     INGREDIENTS = {
         'hamburguer': ['pao', 'carne', 'queijo'],
@@ -16,10 +19,22 @@ class InventoryControl:
     }
 
     def __init__(self):
-        pass
+        self.new_order = TrackOrders()
+        self.ingredients_manager = {
+            'pao': 0,
+            'carne': 0,
+            'queijo': 0,
+            'molho': 0,
+            'presunto': 0,
+            'massa': 0,
+            'frango': 0,
+        }
 
     def add_new_order(self, customer, order, day):
-        pass
+        self.new_order.add_new_order(customer, order, day)
+
+        for ingredient in self.INGREDIENTS[order]:
+            self.ingredients_manager[ingredient] += 1
 
     def get_quantities_to_buy(self):
         pass
